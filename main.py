@@ -32,19 +32,6 @@ encoder = load_model(path)
 path = "model/model.pkl"
 model = load_model(path)
 
-#Encoder troubleshooting
-if encoder is None:
-    print("Encoder could not be loaded.")
-else:
-    print("Encoder loaded successfully.")
-    print(encoder)
-
-if model is None:
-    print("Model could not be loaded.")
-else:
-    print("Model loaded successfully.")
-    print(model)
-
 # Create a RESTful API using FastAPI
 app = FastAPI()
 
