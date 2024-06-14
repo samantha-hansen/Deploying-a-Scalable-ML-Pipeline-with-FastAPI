@@ -32,6 +32,19 @@ encoder = load_model(path)
 path = "model/model.pkl"
 model = load_model(path)
 
+#Encoder troubleshooting
+if encoder is None:
+    print("Encoder could not be loaded.")
+else:
+    print("Encoder loaded successfully.")
+    print(encoder)
+
+if model is None:
+    print("Model could not be loaded.")
+else:
+    print("Model loaded successfully.")
+    print(model)
+
 # Create a RESTful API using FastAPI
 app = FastAPI()
 
@@ -39,7 +52,7 @@ app = FastAPI()
 @app.get("/")
 async def get_root():
     """ Say hello!"""
-    return {"message": "Hello from the API"}
+    return "Hello from the API"
 
 
 # Create a POST on a different path that does model inference
@@ -64,7 +77,7 @@ async def post_inference(data: Data):
         "native-country",
     ]
     data_processed, _, _, _ = process_data(
-        data, categorical_features=cat_features, label=None, training=False
+        data, categorical_features=cat_features, label=None, training=False, encoder=encoder
     )
     _inference = inference(model, data_processed)
     return {"result": apply_label(_inference)}
